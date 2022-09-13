@@ -70,36 +70,36 @@ const addEngineer = () => {
         })
 }
 
-// const addIntern = () => {
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'InternName',
-//             message: "What is the Intern's name?"
-//         },
-//         {
-//             type: 'input',
-//             name: 'engineerId',
-//             message: "What is the engineer's ID?"
-//         },
-//         {
-//             type: 'input',
-//             name: 'engineerEmail',
-//             message: "What is the engineer's email?"
-//         },
-//         {
-//             type: 'input',
-//             name: 'gitHub',
-//             message: "What is the engineer's github?"
-//         },
-//     ])
-//         .then((data) => {
-//             const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.gitHub)
-//             teamMembers.push(engineer)
-//             console.log(teamMembers)
-//             createTeam()
-//         })
-// }
+const addIntern = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'InternName',
+            message: "What is the Intern's name?"
+        },
+        {
+            type: 'input',
+            name: 'internId',
+            message: "What is the intern's ID?"
+        },
+        {
+            type: 'input',
+            name: 'internEmail',
+            message: "What is the intern's email?"
+        },
+        {
+            type: 'input',
+            name: 'internSchool',
+            message: "What is the intern's school?"
+        },
+    ])
+        .then((data) => {
+            const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+            teamMembers.push(intern)
+            console.log(teamMembers)
+            createTeam()
+        })
+}
 const createTeam = () => {
     inquirer.prompt([
         {
@@ -125,12 +125,14 @@ const createTeam = () => {
 
 
 
-
+function writeToFile(fileName, teamMembers) {
+    return fs.writeFileSync(fileName, teamMembers)
+}
 
 const renderTeam = (teamMembers) => {
-    fs.writeFileSync('dist/index.html', generateHTML(teamMembers))
+    fs.writeFileSync('dist/index.html', generateHTML({...teamMembers}))
     //make sure the file path is actually correct, "loosey goosey"
-
 }
-createManager()
+createManager();
+
 
