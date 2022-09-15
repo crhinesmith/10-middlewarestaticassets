@@ -34,7 +34,7 @@ const createManager = () => {
         .then((data) => {
             const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber)
             teamMembers.push(manager)
-            console.log(teamMembers)
+     
             createTeam()
         })
 }
@@ -65,7 +65,6 @@ const addEngineer = () => {
         .then((data) => {
             const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.gitHub)
             teamMembers.push(engineer)
-            console.log(teamMembers)
             createTeam()
         })
 }
@@ -74,7 +73,7 @@ const addIntern = () => {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'InternName',
+            name: 'internName',
             message: "What is the Intern's name?"
         },
         {
@@ -96,7 +95,7 @@ const addIntern = () => {
         .then((data) => {
             const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
             teamMembers.push(intern)
-            console.log(teamMembers)
+            console.log("hello", teamMembers, ...teamMembers)
             createTeam()
         })
 }
@@ -118,7 +117,7 @@ const createTeam = () => {
                     addIntern();
                     break;
                 default:
-                    renderTeam();
+                    renderTeam(teamMembers);
             }
         })
 }
@@ -130,8 +129,8 @@ function writeToFile(fileName, teamMembers) {
 }
 
 const renderTeam = (teamMembers) => {
-    fs.writeFileSync('dist/index.html', generateHTML({...teamMembers}))
-    //make sure the file path is actually correct, "loosey goosey"
+    fs.writeFileSync('dist/index.html', generateHTML(teamMembers))
+    
 }
 createManager();
 
