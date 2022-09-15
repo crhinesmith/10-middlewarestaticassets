@@ -23,7 +23,6 @@ function generateHTML(teamMembers) {
         }
         strCards = strCards.concat(`</div>`)
     })
-    console.log(strCards)
     return strCards.concat(`</html>`)
 }
 
